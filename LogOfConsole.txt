@@ -1,0 +1,122 @@
+(base) PS C:\xxx> .\run_both_pipelines.ps1 -Repeats 2 -IntervalMinutes 5
+2025-09-19 11:21:14  Locating python for env 'ticketpipeline'...
+2025-09-19 11:21:16  Found: C:\Users\katha\anaconda3\envs\ticketpipeline\python.exe
+2025-09-19 11:21:16  === CYCLE BEGIN ===
+2025-09-19 11:21:16  START pipeline_etl.py
+2025-09-19 11:21:16.573 | INFO     | __main__:run:320 - Pipeline start (ETL mode)
+2025-09-19 11:21:16.574 | INFO     | __main__:extract_311:28 - Fetching Chicago 311 CSV: https://data.cityofchicago.org/resource/v6vf-nfxy.csv?$order=created_date+DESC&$limit=50000
+C:\xxx\pipeline_etl.py:29: DtypeWarning: Columns (14) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(
+2025-09-19 11:21:28.257 | INFO     | __main__:extract_311:33 - Fetched 50,000 rows (311)
+2025-09-19 11:21:28.257 | INFO     | __main__:extract_acs_and_mapping:53 - Reading ACS (local): data/raw/acs_community.csv
+2025-09-19 11:21:28.257 | INFO     | __main__:extract_acs_and_mapping:56 - Reading Boundaries Mapping (local): data/raw/Boundaries_Community_Areas.csv
+2025-09-19 11:21:28.289 | INFO     | __main__:extract_acs_and_mapping:59 - Mapping rows: 77 (sollte ~77 sein)
+2025-09-19 11:21:28.289 | INFO     | __main__:transform_311:116 - Transforming 311 data in Python (ETL mode)
+2025-09-19 11:21:28.992 | INFO     | __main__:ensure_schema:205 - Warehouse schema ensured (fact_requests, dim_area_extended)
+2025-09-19 11:21:29.008 | INFO     | __main__:load_fact:214 - Loading fact_requests
+2025-09-19 11:21:29.883 | INFO     | __main__:load_fact:283 - Loaded 50,000 rows into fact_requests
+2025-09-19 11:21:29.904 | INFO     | __main__:load_dim_area_extended:287 - Loading dim_area_extended
+2025-09-19 11:21:29.911 | INFO     | __main__:load_dim_area_extended:304 - Loaded 77 rows into dim_area_extended
+2025-09-19 11:21:29.914 | INFO     | __main__:health_check:312 - HealthCheck: fact_requests=50,000, dim_area_extended=77
+2025-09-19 11:21:29.914 | INFO     | __main__:run:334 - Pipeline success (ETL)
+2025-09-19 11:21:29.915 | INFO     | __main__:run:340 - Pipeline end (UTC) in 13.4s
+2025-09-19 11:21:29  OK    pipeline_etl.py
+2025-09-19 11:21:29  START pipeline_elt.py
+2025-09-19 11:21:30.428 | INFO     | __main__:run:191 - Pipeline start (ELT mode)
+2025-09-19 11:21:30.428 | INFO     | __main__:extract_311:27 - Fetching Chicago 311 CSV: https://data.cityofchicago.org/resource/v6vf-nfxy.csv?$order=created_date+DESC&$limit=50000
+C:\xxx\pipeline_elt.py:28: DtypeWarning: Columns (14) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(
+2025-09-19 11:21:43.590 | INFO     | __main__:extract_311:38 - Fetched 50,000 rows (311)
+2025-09-19 11:21:43.590 | INFO     | __main__:extract_acs_and_mapping:59 - Reading ACS (local): data/raw/acs_community.csv
+2025-09-19 11:21:43.590 | INFO     | __main__:extract_acs_and_mapping:62 - Reading Boundaries Mapping (local): data/raw/Boundaries_Community_Areas.csv
+2025-09-19 11:21:43.626 | INFO     | __main__:extract_acs_and_mapping:65 - Mapping rows: 77 (sollte ~77 sein)
+2025-09-19 11:21:43.630 | INFO     | __main__:stage:122 - Staging complete: stg_requests replaced
+2025-09-19 11:21:44.055 | INFO     | __main__:stage:122 - Staging complete: stg_demographics replaced
+2025-09-19 11:21:44.064 | INFO     | __main__:stage:122 - Staging complete: stg_area_map replaced
+2025-09-19 11:21:44.068 | INFO     | __main__:ensure_schema_and_views:174 - Views created: fact_requests_v, dim_area_extended_v
+2025-09-19 11:21:44.108 | INFO     | __main__:health_check:183 - HealthCheck: stg_requests=50,000, fact_requests_v=50,000, dim_area_extended_v=77
+2025-09-19 11:21:44.108 | INFO     | __main__:run:205 - Pipeline success (ELT)
+2025-09-19 11:21:44.109 | INFO     | __main__:run:211 - Pipeline end (UTC) in 13.7s
+2025-09-19 11:21:44  OK    pipeline_elt.py
+2025-09-19 11:21:44  === CYCLE END   ===
+2025-09-19 11:21:44  Sleeping 5 minute(s) before next cycle (1 of 2)...
+2025-09-19 11:26:44  === CYCLE BEGIN ===
+2025-09-19 11:26:44  START pipeline_etl.py
+2025-09-19 11:26:44.589 | INFO     | __main__:run:320 - Pipeline start (ETL mode)
+2025-09-19 11:26:44.590 | INFO     | __main__:extract_311:28 - Fetching Chicago 311 CSV: https://data.cityofchicago.org/resource/v6vf-nfxy.csv?$order=created_date+DESC&$limit=50000
+C:\xxx\pipeline_etl.py:29: DtypeWarning: Columns (14) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(
+2025-09-19 11:27:03.797 | INFO     | __main__:extract_311:33 - Fetched 50,000 rows (311)
+2025-09-19 11:27:03.797 | INFO     | __main__:extract_acs_and_mapping:53 - Reading ACS (local): data/raw/acs_community.csv
+2025-09-19 11:27:03.797 | INFO     | __main__:extract_acs_and_mapping:56 - Reading Boundaries Mapping (local): data/raw/Boundaries_Community_Areas.csv
+2025-09-19 11:27:03.843 | INFO     | __main__:extract_acs_and_mapping:59 - Mapping rows: 77 (sollte ~77 sein)
+2025-09-19 11:27:03.845 | INFO     | __main__:transform_311:116 - Transforming 311 data in Python (ETL mode)
+2025-09-19 11:27:04.515 | INFO     | __main__:ensure_schema:205 - Warehouse schema ensured (fact_requests, dim_area_extended)
+2025-09-19 11:27:04.515 | INFO     | __main__:load_fact:214 - Loading fact_requests
+2025-09-19 11:27:05.397 | INFO     | __main__:load_fact:283 - Loaded 50,000 rows into fact_requests
+2025-09-19 11:27:05.406 | INFO     | __main__:load_dim_area_extended:287 - Loading dim_area_extended
+2025-09-19 11:27:05.423 | INFO     | __main__:load_dim_area_extended:304 - Loaded 77 rows into dim_area_extended
+2025-09-19 11:27:05.427 | INFO     | __main__:health_check:312 - HealthCheck: fact_requests=50,000, dim_area_extended=77
+2025-09-19 11:27:05.427 | INFO     | __main__:run:334 - Pipeline success (ETL)
+2025-09-19 11:27:05.427 | INFO     | __main__:run:340 - Pipeline end (UTC) in 20.8s
+2025-09-19 11:27:05  OK    pipeline_etl.py
+2025-09-19 11:27:05  START pipeline_elt.py
+2025-09-19 11:27:05.964 | INFO     | __main__:run:191 - Pipeline start (ELT mode)
+2025-09-19 11:27:05.964 | INFO     | __main__:extract_311:27 - Fetching Chicago 311 CSV: https://data.cityofchicago.org/resource/v6vf-nfxy.csv?$order=created_date+DESC&$limit=50000
+C:\xxx\pipeline_elt.py:28: DtypeWarning: Columns (14) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(
+2025-09-19 11:27:22.867 | INFO     | __main__:extract_311:38 - Fetched 50,000 rows (311)
+2025-09-19 11:27:22.867 | INFO     | __main__:extract_acs_and_mapping:59 - Reading ACS (local): data/raw/acs_community.csv
+2025-09-19 11:27:22.869 | INFO     | __main__:extract_acs_and_mapping:62 - Reading Boundaries Mapping (local): data/raw/Boundaries_Community_Areas.csv
+2025-09-19 11:27:22.901 | INFO     | __main__:extract_acs_and_mapping:65 - Mapping rows: 77 (sollte ~77 sein)
+2025-09-19 11:27:22.905 | INFO     | __main__:stage:122 - Staging complete: stg_requests replaced
+2025-09-19 11:27:23.311 | INFO     | __main__:stage:122 - Staging complete: stg_demographics replaced
+2025-09-19 11:27:23.328 | INFO     | __main__:stage:122 - Staging complete: stg_area_map replaced
+2025-09-19 11:27:23.349 | INFO     | __main__:ensure_schema_and_views:174 - Views created: fact_requests_v, dim_area_extended_v
+2025-09-19 11:27:23.373 | INFO     | __main__:health_check:183 - HealthCheck: stg_requests=50,000, fact_requests_v=50,000, dim_area_extended_v=77
+2025-09-19 11:27:23.373 | INFO     | __main__:run:205 - Pipeline success (ELT)
+2025-09-19 11:27:23.374 | INFO     | __main__:run:211 - Pipeline end (UTC) in 17.4s
+2025-09-19 11:27:23  OK    pipeline_elt.py
+2025-09-19 11:27:23  === CYCLE END   ===
+2025-09-19 11:27:23  Sleeping 5 minute(s) before next cycle (2 of 2)...
+2025-09-19 11:32:23  === CYCLE BEGIN ===
+2025-09-19 11:32:23  START pipeline_etl.py
+2025-09-19 11:32:23.851 | INFO     | __main__:run:320 - Pipeline start (ETL mode)
+2025-09-19 11:32:23.851 | INFO     | __main__:extract_311:28 - Fetching Chicago 311 CSV: https://data.cityofchicago.org/resource/v6vf-nfxy.csv?$order=created_date+DESC&$limit=50000
+C:\xxx\pipeline_etl.py:29: DtypeWarning: Columns (14) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(
+2025-09-19 11:32:43.586 | INFO     | __main__:extract_311:33 - Fetched 50,000 rows (311)
+2025-09-19 11:32:43.586 | INFO     | __main__:extract_acs_and_mapping:53 - Reading ACS (local): data/raw/acs_community.csv
+2025-09-19 11:32:43.588 | INFO     | __main__:extract_acs_and_mapping:56 - Reading Boundaries Mapping (local): data/raw/Boundaries_Community_Areas.csv
+2025-09-19 11:32:43.619 | INFO     | __main__:extract_acs_and_mapping:59 - Mapping rows: 77 (sollte ~77 sein)
+2025-09-19 11:32:43.621 | INFO     | __main__:transform_311:116 - Transforming 311 data in Python (ETL mode)
+2025-09-19 11:32:44.294 | INFO     | __main__:ensure_schema:205 - Warehouse schema ensured (fact_requests, dim_area_extended)
+2025-09-19 11:32:44.294 | INFO     | __main__:load_fact:214 - Loading fact_requests
+2025-09-19 11:32:45.120 | INFO     | __main__:load_fact:283 - Loaded 50,000 rows into fact_requests
+2025-09-19 11:32:45.141 | INFO     | __main__:load_dim_area_extended:287 - Loading dim_area_extended
+2025-09-19 11:32:45.144 | INFO     | __main__:load_dim_area_extended:304 - Loaded 77 rows into dim_area_extended
+2025-09-19 11:32:45.144 | INFO     | __main__:health_check:312 - HealthCheck: fact_requests=50,000, dim_area_extended=77
+2025-09-19 11:32:45.144 | INFO     | __main__:run:334 - Pipeline success (ETL)
+2025-09-19 11:32:45.144 | INFO     | __main__:run:340 - Pipeline end (UTC) in 21.3s
+2025-09-19 11:32:45  OK    pipeline_etl.py
+2025-09-19 11:32:45  START pipeline_elt.py
+2025-09-19 11:32:45.613 | INFO     | __main__:run:191 - Pipeline start (ELT mode)
+2025-09-19 11:32:45.613 | INFO     | __main__:extract_311:27 - Fetching Chicago 311 CSV: https://data.cityofchicago.org/resource/v6vf-nfxy.csv?$order=created_date+DESC&$limit=50000
+C:\Users\katha\Documents\PortfolioProjects\TicketPipeline\pipeline_elt.py:28: DtypeWarning: Columns (14) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(
+2025-09-19 11:33:00.718 | INFO     | __main__:extract_311:38 - Fetched 50,000 rows (311)
+2025-09-19 11:33:00.718 | INFO     | __main__:extract_acs_and_mapping:59 - Reading ACS (local): data/raw/acs_community.csv
+2025-09-19 11:33:00.718 | INFO     | __main__:extract_acs_and_mapping:62 - Reading Boundaries Mapping (local): data/raw/Boundaries_Community_Areas.csv
+2025-09-19 11:33:00.740 | INFO     | __main__:extract_acs_and_mapping:65 - Mapping rows: 77 (sollte ~77 sein)
+2025-09-19 11:33:00.740 | INFO     | __main__:stage:122 - Staging complete: stg_requests replaced
+2025-09-19 11:33:01.162 | INFO     | __main__:stage:122 - Staging complete: stg_demographics replaced
+2025-09-19 11:33:01.162 | INFO     | __main__:stage:122 - Staging complete: stg_area_map replaced
+2025-09-19 11:33:01.192 | INFO     | __main__:ensure_schema_and_views:174 - Views created: fact_requests_v, dim_area_extended_v
+2025-09-19 11:33:01.216 | INFO     | __main__:health_check:183 - HealthCheck: stg_requests=50,000, fact_requests_v=50,000, dim_area_extended_v=77
+2025-09-19 11:33:01.216 | INFO     | __main__:run:205 - Pipeline success (ELT)
+2025-09-19 11:33:01.216 | INFO     | __main__:run:211 - Pipeline end (UTC) in 15.6s
+2025-09-19 11:33:01  OK    pipeline_elt.py
+2025-09-19 11:33:01  === CYCLE END   ===
+2025-09-19 11:33:01  ALL DONE
+
+All cycles finished. Log at: C:\xxx\pipeline_runs.log
