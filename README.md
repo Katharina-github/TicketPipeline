@@ -85,6 +85,20 @@ Power BI Report
 
 ---
 
+## 📑 ETL vs. ELT – Key Takeaways
+- **ETL:**  
+  ✅ Clear, pre-aggregated tables  
+  ✅ Easier to consume for BI tools  
+  ❌ Less flexible if requirements change  
+
+- **ELT:**  
+  ✅ Raw history preserved in staging  
+  ✅ Pushes heavy transformations to SQL/database layer  
+  ✅ Easier to change transformations without rerunning full pipeline  
+  ❌ Requires stronger SQL skills and DB optimization  
+
+---
+
 ## Power BI Dashboard
 Key insights:
 - SLA compliance
@@ -119,18 +133,6 @@ Dashboard and Schema ELT:
 ├── README.md # Project documentation
 
 └── screenshots/ # Power BI dashboard & schema screenshots
-
-## 📑 ETL vs. ELT – Key Takeaways
-- **ETL:**  
-  ✅ Clear, pre-aggregated tables  
-  ✅ Easier to consume for BI tools  
-  ❌ Less flexible if requirements change  
-
-- **ELT:**  
-  ✅ Raw history preserved in staging  
-  ✅ Pushes heavy transformations to SQL/database layer  
-  ✅ Easier to change transformations without rerunning full pipeline  
-  ❌ Requires stronger SQL skills and DB optimization  
 
 ---
 
