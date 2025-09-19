@@ -47,7 +47,7 @@ Target system:
 
 ## Architecture diagram
   
-ETL Flow
+### ETL Flow
 
 API (311 Service Requests)
 
@@ -65,7 +65,7 @@ SQLite Database (fact_requests, dim_area_extended)
 
 Power BI Report
 
-ELT Flow
+### ELT Flow
 
 API (311 Service Requests)
 
@@ -87,10 +87,10 @@ Power BI Report
 
 ## Power BI Dashboard
 Key insights:
-- SLA compliance vs. breaches across request types
-- Average resolution time by department
-- Open vs. closed tickets trend
-- Geographic analysis with demographics (per capita income, hardship index)
+- SLA compliance
+- Average resolution time
+- tickets trend
+- analysis with demographics (per capita income, hardship index)
 
 Dashboard and Schema ETL:
 ![Dashboard ETL](screenshot/ETL_dashboard.png)
@@ -145,27 +145,27 @@ Users should adapt paths for their environment and optionally configure Windows 
    
    cd chicago-311-pipeline
 
-3. Create and activate Conda environment (bash)
-4. 
+2. Create and activate Conda environment (bash)
+
    conda create -n ticketpipeline python=3.12
    
    conda activate ticketpipeline
    
    pip install -r requirements.txt
 
-6. Run ETL pipeline (bash)
+3. Run ETL pipeline (bash)
 
    python pipeline_etl.py
 
-8. Run ELT pipeline (bash)
+4. Run ELT pipeline (bash)
 
    python pipeline_elt.py
 
-10. Open Power BI → connect to warehouse_etl.db or warehouse_elt.db
+5. Open Power BI → connect to warehouse_etl.db or warehouse_elt.db
 
-11. Optional: Automate via PowerShell (powershell)
+6. Optional: Automate via PowerShell (powershell)
 
-   .\run_pipelines_template.ps1
+     .\run_pipelines_template.ps1
 
 ---
 
