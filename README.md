@@ -52,12 +52,15 @@ ETL Flow
 API (311 Service Requests)
 
 Local CSV (Demographics & Mapping)
+
 ↓
 
 Python Transformations (resolution time, SLA, date splits)
+
 ↓
 
 SQLite Database (fact_requests, dim_area_extended)
+
 ↓
 
 Power BI Report
@@ -67,12 +70,15 @@ ELT Flow
 API (311 Service Requests)
 
 Local CSV (Demographics & Mapping)
+
 ↓
 
 SQLite Staging Tables
+
 ↓
 
 SQL Views (fact_requests_v, dim_area_extended_v)
+
 ↓
 
 Power BI Report
@@ -86,19 +92,32 @@ Key insights:
 - Open vs. closed tickets trend
 - Geographic analysis with demographics (per capita income, hardship index)
 
-(Screenshots of dashboards go here)
+Dashboard and Schema ETL:
+![Dashboard ETL](screenshot/ETL_dashboard.png)
+![Schema ETL](screenshot/model_ETL.png)
+
+Dashboard and Schema ELT:
+![Dashboard ELT](screenshot/ELT_dashboard.png)
+![Schema ELT](screenshot/model_ELT.png)
 
 ---
 
 ## Repository Structure
 
 ├── pipeline_etl.py # ETL pipeline
+
 ├── pipeline_elt.py # ELT pipeline
+
 ├── run_pipelines_template.ps1 # Automation script (PowerShell)
+
 ├── data/
+
 │ └── raw/ # ACS + mapping CSVs (public data)
+
 ├── log/ # Run log
+
 ├── README.md # Project documentation
+
 └── screenshots/ # Power BI dashboard & schema screenshots
 
 ## 📑 ETL vs. ELT – Key Takeaways
@@ -123,22 +142,29 @@ Users should adapt paths for their environment and optionally configure Windows 
 1. Clone the repo (bash) 
 
    git clone https://github.com/<your-username>/chicago-311-pipeline.git
+   
    cd chicago-311-pipeline
 
-2. Create and activate Conda environment (bash)
+3. Create and activate Conda environment (bash)
+4. 
    conda create -n ticketpipeline python=3.12
+   
    conda activate ticketpipeline
+   
    pip install -r requirements.txt
 
-3. Run ETL pipeline (bash)
+6. Run ETL pipeline (bash)
+
    python pipeline_etl.py
 
-4. Run ELT pipeline (bash)
+8. Run ELT pipeline (bash)
+
    python pipeline_elt.py
 
-5. Open Power BI → connect to warehouse_etl.db or warehouse_elt.db
+10. Open Power BI → connect to warehouse_etl.db or warehouse_elt.db
 
-6. Optional: Automate via PowerShell (powershell)
+11. Optional: Automate via PowerShell (powershell)
+
    .\run_pipelines_template.ps1
 
 ---
